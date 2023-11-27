@@ -5,10 +5,10 @@ import './index.css';
 
 function App() {
   return (
-    <div className="grid grid-cols-6 App" >
-      <div className='main'>
+    <div className="grid grid-cols-12 App" >
+      <div className='col-span-2 main'>
       </div>
-      <div className='col-span-5'>
+      <div className='col-span-10'>
       <Chatbot />
 
       </div>
