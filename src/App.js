@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Chatbot from './comp/Chatbot1';
+import Chatbot from './comp/Chatbot';
 import './index.css';
 import Course from "./comp/Course";
 import logo from './/img/logo.png';
