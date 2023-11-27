@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { question, answer } from './data';
 import logo from '../img/logo.png'
 import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 const Chatbot = () => {
+  var scrollBox;
   const [messages, setMessages] = useState([
     ' Сайн уу! Та асуух зүйлээ доорх сонголтоос сонгоно уу?',
   ]);
@@ -21,16 +22,13 @@ const Chatbot = () => {
     console.log(value);
     setMessages([...messages, `${value}`, ` ${getResponse(value)}`]);
   }
-
-  // var scrollBox = document.getElementById('scrollBox');
-  // scrollBox.scrollTop = scrollBox.scrollHeight; // Scroll to the bottom initially
-
-  // setInterval(function() {
-  //   scrollBox.scrollTop = scrollBox.scrollHeight; // Auto-scroll to the bottom periodically
-  // }, 2000); // Change the interval as needed (milliseconds)
-
+  useEffect(() => {
+    const scrollBox = document.getElementById('scrollbox');
+    scrollBox.scrollTop = scrollBox.scrollHeight;
+  }, [messages]);
   return (
     <div className='container'>
+      <div className='header'></div>
       <div className="chat-container" id='scrollbox'>
         {messages.map((message, index) => (
           <div className={message.startsWith(' ') ? 'chatRobot' : 'chatUser'}>
@@ -51,8 +49,8 @@ const Chatbot = () => {
                 </div>
               </button>
           ))}
-        </div>
       </div>
+    </div>
   );
 };
 
