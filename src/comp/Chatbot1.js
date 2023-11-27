@@ -7,7 +7,6 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([
     ' Сайн уу! Та асуух зүйлээ доорх сонголтоос сонгоно уу?',
   ]);
-  // const [input, setInput] = useState('');
 
   const getResponse = (message) => {
     for (const key in answer) {
