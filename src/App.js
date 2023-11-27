@@ -5,9 +5,13 @@ import './index.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className="grid grid-cols-6 App" >
+      <div className='main'>
+      </div>
+      <div className='col-span-5'>
       <Chatbot />
-      {/* <Tab /> */}
+
+      </div>
     </div>
   );
 }

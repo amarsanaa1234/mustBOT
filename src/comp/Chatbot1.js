@@ -24,12 +24,17 @@ const Chatbot = () => {
     console.log(value);
     setMessages([...messages, `${value}`, ` ${getResponse(value)}`]);
   }
-  
+
+  // var scrollBox = document.getElementById('scrollBox');
+  // scrollBox.scrollTop = scrollBox.scrollHeight; // Scroll to the bottom initially
+
+  // setInterval(function() {
+  //   scrollBox.scrollTop = scrollBox.scrollHeight; // Auto-scroll to the bottom periodically
+  // }, 2000); // Change the interval as needed (milliseconds)
 
   return (
     <div className='container'>
-      <img src={logo} />
-      <div className="chat-container">
+      <div className="chat-container" id='scrollbox'>
         {messages.map((message, index) => (
           <div className={message.startsWith(' ') ? 'chatRobot' : 'chatUser'}>
             {message.startsWith(' ') ? <SmartToyOutlinedIcon fontSize="medium" />: <PersonOutlineOutlinedIcon fontSize="medium" />}
@@ -38,8 +43,8 @@ const Chatbot = () => {
             </div>
           </div>
         ))}
-
-        <div className='questionBox'>
+      </div>
+      <div className='questionBox'>
           {question.map((option, index) => (
               <button className='button' key={index} onClick={() => 
                 clickme(option.question)
@@ -51,7 +56,6 @@ const Chatbot = () => {
           ))}
         </div>
       </div>
-    </div>
   );
 };
 
