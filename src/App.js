@@ -1,15 +1,16 @@
 import React from 'react';
 import Chatbot from './comp/Chatbot1';
-import Tab from './comp/tab';
 import './index.css';
+import Tabs from './comp/Tabs';
 
 function App() {
   return (
     <div className="App">
       <Chatbot />
-      {/* <Tab /> */}
+      {/* <Tabs/> */}
     </div>
   );
 }
 
 export default App;
+
