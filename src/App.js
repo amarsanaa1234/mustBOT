@@ -5,9 +5,12 @@ import Tabs from './comp/Tabs';
 
 function App() {
   return (
-    <div className="App">
+    <div className="grid grid-cols-6 App" >
+      <div className='main'>
+      </div>
+      <div className='col-span-5'>
       <Chatbot />
-      {/* <Tabs/> */}
+      {/* <Tab /> */}
     </div>
   );
 }
