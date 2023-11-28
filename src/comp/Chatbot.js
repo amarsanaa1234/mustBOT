@@ -4,6 +4,7 @@ import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 const Chatbot = () => {
   var scrollBox;
+  const [hiddenHeader, setHiddenHeader] = useState(true);
   const [messages, setMessages] = useState([
     ' Сайн уу! Та асуух зүйлээ доорх сонголтоос сонгоно уу?',
   ]);
@@ -50,11 +51,13 @@ const Chatbot = () => {
   useEffect(() => {
     const scrollBox = document.getElementById('scrollbox');
     scrollBox.scrollTop = scrollBox.scrollHeight;
+    
+    if(scrollBox.scrollHeight > visualViewport.height-100) setHiddenHeader(false);
   }, [messages]);
 
   return (
     <div className='container'>
-      <div className='header'></div>
+      <div className='header' hidden={hiddenHeader}></div>
       <div className="chat-container" id='scrollbox'>
         {messages.map((message, index) => (
           <div className={message.startsWith(' ') ? 'chatRobot' : 'chatUser'}>
