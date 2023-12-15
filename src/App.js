@@ -14,6 +14,10 @@ import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 const  App = () => {
   const [activeTab, setActiveTab] = useState("tab1");
+  const [apiName, setApiName] = useState("title");
+  const [mainTitle, setMainTitle] = useState([{}]);
+
+  const url = "http://localhost:4000";
 
   const handleTab1 = () => {
     window.location.reload();
@@ -22,6 +26,18 @@ const  App = () => {
   const handleTab2 = () => {
     setActiveTab("tab2");
   };
+
+  useEffect(() => {
+    fetch(url + "/" +apiName)
+         .then(response => response.json()) // Parse the response as JSON
+         .then(data => {
+            console.log(data);
+            setMainTitle(data);
+         })
+         .catch(err => {
+            console.log(err.message);
+         });
+  }, []);
 
   return (
     <div className="grid grid-cols-6 App" > 
@@ -82,7 +98,7 @@ const  App = () => {
         </div>
         <div className='col-span-5'>
           <div className="outlet">
-            {activeTab === "tab1" ? <Chatbot /> : <Course/>}
+            {activeTab === "tab1" ? <Chatbot mainTitle={mainTitle}/> : <Course/>}
           </div>
         </div>
     </div>

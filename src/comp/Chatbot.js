@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, tulbur , surgalt , ans } from './data1';
 import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-const Chatbot = () => {
+const Chatbot = ({mainTitle}) => {
   var scrollBox;
   const [hiddenHeader, setHiddenHeader] = useState(true);
   const [messages, setMessages] = useState([
@@ -11,6 +11,10 @@ const Chatbot = () => {
   const [hiddenQuestionTulbur, setHiddenQuestionTulbur]  = useState(true);
   const [questionhidden, setQuestionhidden]  = useState(false);
   const [hiddenQuestionSurgalt, setHiddenQuestionSurgalt]  = useState(true);
+  const [answer, setAnswer] = useState([{}]);
+  const [question, setQuestion] = useState([{}]);
+
+  const url = "http://localhost:4000";
 
 
   const getResponse = (message) => {
@@ -47,6 +51,33 @@ const Chatbot = () => {
     }
   }
 
+  const subTitleClick = (id) => {
+    fetch(url + "/question/" + id)
+         .then(response => response.json()) // Parse the response as JSON
+         .then(data => {
+            console.log("question == > ",data);
+            setQuestion(data);
+            setHiddenQuestionTulbur(false);
+            setQuestionhidden(true);
+         })
+         .catch(err => {
+            console.log(err.message);
+         });
+  }
+  const questionClick = (id) => {
+    fetch(url + "/answer/" + id)
+         .then(response => response.json()) // Parse the response as JSON
+         .then(data => {
+            console.log("answer == > ",data);
+            setAnswer(data);
+            setHiddenQuestionTulbur(false);
+            setQuestionhidden(true);
+         })
+         .catch(err => {
+            console.log(err.message);
+         });
+  }
+
 
   useEffect(() => {
     const scrollBox = document.getElementById('scrollbox');
@@ -70,41 +101,29 @@ const Chatbot = () => {
       </div>
 
       <div className='questionBox' hidden = {questionhidden} >
-          {collection.map((option, index) => (
-              <button className='button' key={index} onClick={() => 
-                clickme(option.question, option.type, option.option)
-              }>
+          {mainTitle.map((option, index) => (
+              <button className='button' key={index} 
+              // onClick={() => clickme(option.question, option.type, option.option)}
+              onClick={() => subTitleClick(option.ID)}
+              >
                 <div className='question'>
-                  {option.question}
+                  {option.NAME}
                 </div>
               </button>
           ))}
       </div>
-
       <div className='questionBox' hidden = {hiddenQuestionTulbur}>
-          {tulbur.map((option, index) => (
-              <button className='button' key={index} onClick={() => 
-                clickme(option.question, option.type, option.option)
-              }>
+          {question.map((option, index) => (
+              <button className='button' key={index} 
+              // onClick={() => clickme(option.question, option.type, option.option)}
+                onClick={() => questionClick(option.ID)}
+              >
                 <div className='question'>
-                  {option.question}
+                  {option.QUESTION_TITLE}
                 </div>
               </button>
           ))}
-      </div>
-      
-      <div className='questionBox' hidden = {hiddenQuestionSurgalt}>
-          {surgalt.map((option, index) => (
-              <button className='button' key={index} onClick={() => 
-                clickme(option.question, option.type, option.option)
-              }>
-                <div className='question'>
-                  {option.question}
-                </div>
-              </button>
-          ))}
-      </div>
-      
+      </div>      
     </div>
   );
 };
